@@ -5,30 +5,38 @@ using UnityEngine;
 public class DetectAndChase : Character {
 
     private GameObject playerRef;
-    private bool isPlayerNear;
+    [HideInInspector]
+    public bool isPlayerNear;
     private float detectionRadius;
     public float loseInterestRadius;
     private Vector3 returnPoint;
-    private SphereCollider collider;
+    private SphereCollider DetectionCollider;
     private void Awake()
     {
         //Getter component for sphere collider
-        collider = GetComponent<SphereCollider>();
+        DetectionCollider = GetComponent<SphereCollider>();
         isPlayerNear = false;
         
         //saving the current radius of the enemy
-        detectionRadius = collider.radius;
+        detectionRadius = DetectionCollider.radius;
     }
 
     // Update is called once per frame
     void FixedUpdate ()
     {
         //if player is near then pursue the basterd!
-		if(isPlayerNear)
+		if(isPlayerNear&&playerRef)
         {
-            ChasePlayer();
+            if(Vector3.Distance(playerRef.transform.position,transform.position)<=loseInterestRadius)
+            {
+                ChasePlayer();
+            }
+            else
+            {
+                isPlayerNear = false;
+            }
         }
-        else if(Vector3.Distance(transform.position,returnPoint)<=10 && returnPoint!=Vector3.zero)
+        else if(returnPoint!=Vector3.zero)
         {
             ReturnPoint();
         }
@@ -54,6 +62,11 @@ public class DetectAndChase : Character {
             {
                 transform.position += transform.forward * speed * Time.deltaTime;
             }
+        }
+        if(Vector3.Distance(returnPoint,transform.position)<=1)
+        {
+            returnPoint = Vector3.zero;
+            DetectionCollider.enabled = true;
         }
     }
 
@@ -91,7 +104,12 @@ public class DetectAndChase : Character {
             //get player reference
             playerRef = col.gameObject;
             returnPoint = transform.position;
-            collider.radius = loseInterestRadius;
+            DetectionCollider.enabled = false;
+        }
+        else if(col.GetComponent<Home>())
+        {
+            isPlayerNear = false;
+            StartCoroutine(WaitToGetAway());
         }
     }
 
@@ -99,8 +117,14 @@ public class DetectAndChase : Character {
     {
         if(col.GetComponent<Player>())
         {
-            collider.radius = detectionRadius;
-            isPlayerNear = true;
+            DetectionCollider.enabled = true;
+            isPlayerNear = false;
         }
+    }
+
+    IEnumerator WaitToGetAway()
+    {
+        yield return new WaitForSeconds(5f);
+        DetectionCollider.enabled = true;
     }
 }

@@ -307,15 +307,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4551803826351372, guid: 3e64700e602e85b4089bfe94cf3046b8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9.06
+      value: -1.05
       objectReference: {fileID: 0}
     - target: {fileID: 4551803826351372, guid: 3e64700e602e85b4089bfe94cf3046b8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.9061978
+      value: -7.4
       objectReference: {fileID: 0}
     - target: {fileID: 4551803826351372, guid: 3e64700e602e85b4089bfe94cf3046b8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4551803826351372, guid: 3e64700e602e85b4089bfe94cf3046b8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -393,11 +393,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4833819006001134, guid: 8a8e9a5ecbd1b294e961b4588acd697b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.93
+      value: 8.99
       objectReference: {fileID: 0}
     - target: {fileID: 4833819006001134, guid: 8a8e9a5ecbd1b294e961b4588acd697b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4833819006001134, guid: 8a8e9a5ecbd1b294e961b4588acd697b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -419,6 +419,29 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114410317973561952, guid: 8a8e9a5ecbd1b294e961b4588acd697b, type: 2}
+    - {fileID: 65424558767104428, guid: 8a8e9a5ecbd1b294e961b4588acd697b, type: 2}
+    - {fileID: 54989806702710866, guid: 8a8e9a5ecbd1b294e961b4588acd697b, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 8a8e9a5ecbd1b294e961b4588acd697b, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1867217698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1620446495696152, guid: e42f4596ff7a5c441a8f430d3548a70b,
+    type: 2}
+  m_PrefabInternal: {fileID: 485597003}
+--- !u!54 &1867217704
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1867217698}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
