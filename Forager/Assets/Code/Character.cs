@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour 
 {
 	public int speed;
+	int currentSpeed = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,10 +15,18 @@ public class Character : MonoBehaviour
 	void Update () {
 		
 	}
-	
+	//protected void Thrust(int direction) 
 	protected void Move(int direction)
 	{
-		//Vector3 newPosition = new Vector3(transform.position.x+1
+		//Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + (direction*speed));
+		//Debug.Log(newPosition);
+		//transform.position = newPosition;
 		//transform.position.x += speed;
+		transform.Translate(0,0,(direction*speed));
+		Camera.main.transform.position = new Vector3(transform.position.x, 20, transform.position.z);
+	}
+	protected void Rotate(int direction)
+	{
+		transform.Rotate(0,(direction*speed),0);
 	}
 }
