@@ -9,12 +9,35 @@ public class AsteroidShell : MonoBehaviour {
     public float asteroidHealth=20;
     private bool isCoolingDown;
     public GameObject dropObject;
+
+
+    private void Awake()
+    {
+        sliderComp.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if(col.GetComponent<Player>())
+        {
+            sliderComp.gameObject.SetActive(true);
+        }
+    }
+
     private void OnTriggerStay(Collider col)
     {
 
         if(col.GetComponent<Player>().bIsMining)
         {
-            MineAsteroid();    
+            MineAsteroid();
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if(col.GetComponent<Player>())
+        {
+            sliderComp.gameObject.SetActive(false);
         }
     }
 
