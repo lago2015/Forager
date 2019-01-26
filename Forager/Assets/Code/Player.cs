@@ -17,6 +17,7 @@ public class Player : Character
 	{
 		InputManager.OnMovementInput += Move;
 		InputManager.OnRotationInput += Rotate;
+        InputManager.OnDashInput += Dash;
         //InputManager.onFireInput += OnFireInput;
         inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
         scoreAmountDisplay.text = "Score: " + score;
@@ -108,4 +109,5 @@ public class Player : Character
         //Spawn explosion particle
         Destroy(gameObject);
     }
+	
 }

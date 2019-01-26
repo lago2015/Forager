@@ -12,6 +12,9 @@ public class InputManager : MonoBehaviour
 	
 	public delegate void RotationInput(int direction);
 	public static event RotationInput OnRotationInput;
+	
+	public delegate void DashInput();
+	public static event DashInput OnDashInput;
 
     //public delegate void FireInput(bool isFiring);
     //public static event FireInput onFireInput;
@@ -56,7 +59,10 @@ public class InputManager : MonoBehaviour
 				OnRotationInput(currentRotationDirection);
 			//}
 		}
-
+		if(Input.GetButton("Fire2"))
+		{
+			OnDashInput();
+		}
         
 		
 	}

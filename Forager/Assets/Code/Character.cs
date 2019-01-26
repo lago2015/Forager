@@ -31,7 +31,14 @@ public class Character : MonoBehaviour
             transform.Rotate(0, (direction * rotationSpeed), 0);
         }
 	}
-
+	public void Dash()
+	{
+		if(!bIsDead)
+        {
+            transform.Translate(0, 0, (1 * (speed*2)));
+            Camera.main.transform.position = new Vector3(transform.position.x, 50, transform.position.z);
+        }
+	}
     //protected void OnFireInput(bool bIsMining)
     //{
     //    if(!bIsDead)
