@@ -41,8 +41,26 @@ public class Player : Character
 	}
 	public void ReachHome()
 	{
-		addScore(amountCarrying);
+        if(amountCarrying>0)
+		    addScore(amountCarrying);
 		amountCarrying = 0;
-		inventoryAmountDisplay.text = amountCarrying.ToString();
+
+        if(inventoryAmountDisplay)
+		    inventoryAmountDisplay.text = amountCarrying.ToString();
 	}
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.CompareTag("Enemy") && !col.gameObject.GetComponent<Collider>().isTrigger)
+        {
+            PlayerDeath();
+        }
+    }
+
+    public void PlayerDeath()
+    {
+        bIsDead = true;
+        //Spawn explosion particle
+        Destroy(gameObject);
+    }
 }

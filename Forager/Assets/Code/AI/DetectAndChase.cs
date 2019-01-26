@@ -5,38 +5,81 @@ using UnityEngine;
 public class DetectAndChase : Character {
 
     private GameObject playerRef;
-    private bool isPlayerNear;
+    [HideInInspector]
+    public bool isPlayerNear;
     private float detectionRadius;
     public float loseInterestRadius;
-    private SphereCollider collider;
+    private Vector3 returnPoint;
+    private SphereCollider DetectionCollider;
     private void Awake()
     {
         //Getter component for sphere collider
-        collider = GetComponent<SphereCollider>();
+        DetectionCollider = GetComponent<SphereCollider>();
         isPlayerNear = false;
-        enabled = false;
+        
         //saving the current radius of the enemy
-        detectionRadius = collider.radius;
+        detectionRadius = DetectionCollider.radius;
     }
 
     // Update is called once per frame
     void FixedUpdate ()
     {
         //if player is near then pursue the basterd!
-		if(isPlayerNear)
+		if(isPlayerNear&&playerRef)
         {
-            ChasePlayer();
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            if(Vector3.Distance(playerRef.transform.position,transform.position)<=loseInterestRadius)
+            {
+                ChasePlayer();
+            }
+            else
+            {
+                isPlayerNear = false;
+            }
         }
-	}
+        else if(returnPoint!=Vector3.zero)
+        {
+            ReturnPoint();
+        }
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+    }
+
+    void ReturnPoint()
+    {
+        //apply rotation
+        if (rotationSpeed > 0)
+        {
+            Quaternion rotation = Quaternion.LookRotation(returnPoint - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        }
+        //apply movement
+        if (speed > 0)
+        {
+            if (transform.parent)
+            {
+                transform.parent.position += transform.forward * speed * Time.deltaTime;
+            }
+            else
+            {
+                transform.position += transform.forward * speed * Time.deltaTime;
+            }
+        }
+        if(Vector3.Distance(returnPoint,transform.position)<=1)
+        {
+            returnPoint = Vector3.zero;
+            DetectionCollider.enabled = true;
+        }
+    }
 
     void ChasePlayer()
     {
         //apply rotation
         if (rotationSpeed > 0)
         {
-            Quaternion rotation = Quaternion.LookRotation(playerRef.transform.position - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+            if(playerRef)
+            {
+                Quaternion rotation = Quaternion.LookRotation(playerRef.transform.position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+            }
         }
         //apply movement
         if (speed > 0)
@@ -57,12 +100,16 @@ public class DetectAndChase : Character {
         if(col.GetComponent<Player>())
         {
             //turn on FixedUpdate() so the gameobject can pursue
-            enabled = true;
             isPlayerNear = true;
             //get player reference
             playerRef = col.gameObject;
-
-            collider.radius = loseInterestRadius;
+            returnPoint = transform.position;
+            DetectionCollider.enabled = false;
+        }
+        else if(col.GetComponent<Home>())
+        {
+            isPlayerNear = false;
+            StartCoroutine(WaitToGetAway());
         }
     }
 
@@ -70,9 +117,14 @@ public class DetectAndChase : Character {
     {
         if(col.GetComponent<Player>())
         {
-            collider.radius = detectionRadius;
-            enabled = false;
-            isPlayerNear = true;
+            DetectionCollider.enabled = true;
+            isPlayerNear = false;
         }
+    }
+
+    IEnumerator WaitToGetAway()
+    {
+        yield return new WaitForSeconds(5f);
+        DetectionCollider.enabled = true;
     }
 }
