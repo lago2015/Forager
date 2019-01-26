@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour 
 {
 	public int speed;
+	public float rotationSpeed;
 	int currentSpeed = 0;
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,6 @@ public class Character : MonoBehaviour
 	}
 	protected void Rotate(int direction)
 	{
-		transform.Rotate(0,(direction*speed),0);
+		transform.Rotate(0,(direction*rotationSpeed),0);
 	}
 }

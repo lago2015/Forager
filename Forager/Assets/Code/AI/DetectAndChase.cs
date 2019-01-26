@@ -5,7 +5,6 @@ using UnityEngine;
 public class DetectAndChase : Character {
 
     private GameObject playerRef;
-    public float rotationSpeed;
     private bool isPlayerNear;
     private float detectionRadius;
     public float loseInterestRadius;
