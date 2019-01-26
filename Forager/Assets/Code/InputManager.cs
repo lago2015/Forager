@@ -13,8 +13,11 @@ public class InputManager : MonoBehaviour
 	public delegate void RotationInput(int direction);
 	public static event RotationInput OnRotationInput;
 
-    [HideInInspector]
-    public bool bIsMining;
+    //public delegate void FireInput(bool isFiring);
+    //public static event FireInput onFireInput;
+
+    
+    bool bIsMining;
 	int currentMovementDirection = 0;
 	int currentRotationDirection = 0;
 	// Use this for initialization
@@ -54,16 +57,12 @@ public class InputManager : MonoBehaviour
 			//}
 		}
 
-        if(Input.GetButtonDown("MiningTool"))
-        {
-            bIsMining = true;
-        }
-        if(Input.GetButtonUp("MiningTool"))
-        {
-            bIsMining = false;
-        }
+        
 		
 	}
+
+    
+
 	int GetPlayerDirectionalInput()
 	{
 		if(Input.GetAxisRaw("Vertical") >= 1)

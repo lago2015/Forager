@@ -8,7 +8,8 @@ public class Player : Character
     private int[] materialInventory =new int[4];
 	int amountCarrying = 0;
 	int score = 0;
-	
+    [HideInInspector]
+    public bool bIsMining;
 	public Text inventoryAmountDisplay;
 	public Text scoreAmountDisplay;
 	// Use this for initialization
@@ -16,10 +17,24 @@ public class Player : Character
 	{
 		InputManager.OnMovementInput += Move;
 		InputManager.OnRotationInput += Rotate;
+        //InputManager.onFireInput += OnFireInput;
         inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
         scoreAmountDisplay.text = "Score: " + score;
 
     }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("MiningTool"))
+        {
+            bIsMining = true;
+        }
+        if (Input.GetButtonUp("MiningTool"))
+        {
+            bIsMining = false;
+        }
+    }
+
     //storing material count for when player goes back to hub
     public void addMaterial(Collectible.MaterialSources currentMaterial)
     {

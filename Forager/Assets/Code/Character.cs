@@ -9,7 +9,8 @@ public class Character : MonoBehaviour
 	int currentSpeed = 0;
     [HideInInspector]
     public bool bIsDead;
-
+    [HideInInspector]
+    public bool bIsCurrentlyMining;
 	//protected void Thrust(int direction) 
 	protected void Move(int direction)
 	{
@@ -30,4 +31,13 @@ public class Character : MonoBehaviour
             transform.Rotate(0, (direction * rotationSpeed), 0);
         }
 	}
+
+    //protected void OnFireInput(bool bIsMining)
+    //{
+    //    if(!bIsDead)
+    //    {
+    //        bIsCurrentlyMining = bIsMining;
+    //        Debug.Log("Mining");
+    //    }
+    //}
 }
