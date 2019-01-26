@@ -9,6 +9,7 @@ public class Player : Character
 	void Start () 
 	{
 		InputManager.OnMovementInput += Move;
+		InputManager.OnRotationInput += Rotate;
 	}
 	
 	// Update is called once per frame
