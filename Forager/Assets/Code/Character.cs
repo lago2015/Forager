@@ -11,6 +11,9 @@ public class Character : MonoBehaviour
     public bool bIsDead;
     [HideInInspector]
     public bool bIsCurrentlyMining;
+	
+	protected int boostAmount = 100;
+	private int amountUsedToBoost = 1;
 	//protected void Thrust(int direction) 
 	protected void Move(int direction)
 	{
@@ -31,12 +34,16 @@ public class Character : MonoBehaviour
             transform.Rotate(0, (direction * rotationSpeed), 0);
         }
 	}
-	public void Dash()
+	public virtual void Dash()
 	{
 		if(!bIsDead)
         {
-            transform.Translate(0, 0, (1 * (speed*2)));
-            Camera.main.transform.position = new Vector3(transform.position.x, 50, transform.position.z);
+			if(boostAmount > 0)
+			{
+				transform.Translate(0, 0, (1 * (speed*2)));
+				Camera.main.transform.position = new Vector3(transform.position.x, 50, transform.position.z);
+				boostAmount = boostAmount - amountUsedToBoost;
+			}
         }
 	}
     //protected void OnFireInput(bool bIsMining)

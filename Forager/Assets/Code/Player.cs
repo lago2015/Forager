@@ -12,6 +12,7 @@ public class Player : Character
     public bool bIsMining;
 	public Text inventoryAmountDisplay;
 	public Text scoreAmountDisplay;
+	public Slider boostDisplay;
 	// Use this for initialization
 	void Start () 
 	{
@@ -92,7 +93,11 @@ public class Player : Character
 		amountCarrying = 0;
 
         if(inventoryAmountDisplay)
+		{
 		    inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
+		}
+		boostAmount = 100;
+		boostDisplay.value = boostAmount;
     }
 
     private void OnCollisionEnter(Collision col)
@@ -109,5 +114,9 @@ public class Player : Character
         //Spawn explosion particle
         Destroy(gameObject);
     }
-	
+	public override void Dash()
+	{
+		boostDisplay.value = boostAmount;
+		base.Dash();
+	}
 }
