@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour 
 {
-	int speed;
+	public int speed;
 	// Use this for initialization
 	void Start () {
 		
@@ -15,8 +15,9 @@ public class Character : MonoBehaviour
 		
 	}
 	
-	void Move(int direction)
+	protected void Move(int direction)
 	{
-		
+		//Vector3 newPosition = new Vector3(transform.position.x+1
+		//transform.position.x += speed;
 	}
 }
