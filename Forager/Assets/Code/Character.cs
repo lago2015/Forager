@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
 		//transform.position = newPosition;
 		//transform.position.x += speed;
 		transform.Translate(0,0,(direction*speed));
-		Camera.main.transform.position = new Vector3(transform.position.x, 20, transform.position.z);
+		Camera.main.transform.position = new Vector3(transform.position.x, 50, transform.position.z);
 	}
 	protected void Rotate(int direction)
 	{
