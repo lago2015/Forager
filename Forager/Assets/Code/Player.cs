@@ -6,8 +6,9 @@ public class Player : Character
 {
 	string[] inventory = new string[5]; //probaly turn into list later
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+	{
+		InputManager.OnMovementInput += Move;
 	}
 	
 	// Update is called once per frame
