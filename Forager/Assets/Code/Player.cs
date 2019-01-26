@@ -45,4 +45,18 @@ public class Player : Character
 		amountCarrying = 0;
 		inventoryAmountDisplay.text = amountCarrying.ToString();
 	}
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.CompareTag("Enemy") && !col.gameObject.GetComponent<Collider>().isTrigger)
+        {
+            PlayerDeath();
+        }
+    }
+
+    public void PlayerDeath()
+    {
+        //Spawn explosion particle
+        Destroy(gameObject);
+    }
 }

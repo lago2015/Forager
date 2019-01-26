@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class Home : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 	void OnTriggerEnter(Collider other)
 	{
-		other.GetComponent<Player>().ReachHome();
+        if(other.GetComponent<Player>())
+        {
+            other.GetComponent<Player>().ReachHome();
+        }
+		
 	}
 }

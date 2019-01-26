@@ -8,6 +8,7 @@ public class DetectAndChase : Character {
     private bool isPlayerNear;
     private float detectionRadius;
     public float loseInterestRadius;
+    private Vector3 returnPoint;
     private SphereCollider collider;
     private void Awake()
     {
@@ -26,9 +27,35 @@ public class DetectAndChase : Character {
 		if(isPlayerNear)
         {
             ChasePlayer();
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
-	}
+        else if(Vector3.Distance(transform.position,returnPoint)<=10)
+        {
+            ReturnPoint();
+        }
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+    }
+
+    void ReturnPoint()
+    {
+        //apply rotation
+        if (rotationSpeed > 0)
+        {
+            Quaternion rotation = Quaternion.LookRotation(returnPoint - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        }
+        //apply movement
+        if (speed > 0)
+        {
+            if (transform.parent)
+            {
+                transform.parent.position += transform.forward * speed * Time.deltaTime;
+            }
+            else
+            {
+                transform.position += transform.forward * speed * Time.deltaTime;
+            }
+        }
+    }
 
     void ChasePlayer()
     {
@@ -61,7 +88,7 @@ public class DetectAndChase : Character {
             isPlayerNear = true;
             //get player reference
             playerRef = col.gameObject;
-
+            returnPoint = transform.position;
             collider.radius = loseInterestRadius;
         }
     }
@@ -71,7 +98,6 @@ public class DetectAndChase : Character {
         if(col.GetComponent<Player>())
         {
             collider.radius = detectionRadius;
-            enabled = false;
             isPlayerNear = true;
         }
     }
