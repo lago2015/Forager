@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Character 
 {
-	string[] inventory = new string[5]; //probaly turn into list later
+	//string[] inventory = new string[5]; //probaly turn into list later
+	int amountCarrying = 0;
+	int score = 0;
+	
+	public Text inventoryAmountDisplay;
+	public Text scoreAmountDisplay;
 	// Use this for initialization
 	void Start () 
 	{
@@ -15,5 +21,28 @@ public class Player : Character
 	// Update is called once per frame
 	void Update () {
 		
+	}
+	public void addToInventory(int amount)
+	{
+		amountCarrying += amount;
+		inventoryAmountDisplay.text = amountCarrying.ToString();
+	}
+	public int AmountCarrying
+	{
+		get
+		{
+			return amountCarrying;
+		}
+	}
+	public void addScore(int amount)
+	{
+		score += amount;
+		scoreAmountDisplay.text = score.ToString();
+	}
+	public void ReachHome()
+	{
+		addScore(amountCarrying);
+		amountCarrying = 0;
+		inventoryAmountDisplay.text = amountCarrying.ToString();
 	}
 }
