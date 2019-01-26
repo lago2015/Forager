@@ -13,8 +13,8 @@ public class ArrowUI : MonoBehaviour
 	{
 		Vector3 dir = home.transform.position - player.transform.position;
 		
-		float angle = Mathf.Atan2(dir.x, dir.y)*Mathf.Rad2Deg;
+		float angle = Mathf.Atan2(dir.y, dir.x)*Mathf.Rad2Deg;
 		
-		transform.eulerAngles = new Vector3(0, 0, angle * -1);
+		transform.eulerAngles = new Vector3(0, 0, angle);
 	}
 }
