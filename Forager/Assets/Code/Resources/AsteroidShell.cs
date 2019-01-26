@@ -27,9 +27,10 @@ public class AsteroidShell : MonoBehaviour {
     private void OnTriggerStay(Collider col)
     {
 
-        if(col.GetComponent<Player>().bIsMining)
+        if(col.GetComponent<Player>())
         {
-            MineAsteroid();
+            if(col.GetComponent<Player>().bIsMining)
+                MineAsteroid();
         }
     }
 
