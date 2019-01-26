@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
         if(!bIsDead)
         {
             transform.Translate(0, 0, (direction * speed));
-            Camera.main.transform.position = new Vector3(transform.position.x, 50, transform.position.z);
+            Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -150);
         }
 	}
 	protected void Rotate(int direction)
@@ -41,8 +41,8 @@ public class Character : MonoBehaviour
 			if(boostAmount > 0)
 			{
 				transform.Translate(0, 0, (1 * (speed*2)));
-				Camera.main.transform.position = new Vector3(transform.position.x, 50, transform.position.z);
-				boostAmount = boostAmount - amountUsedToBoost;
+                Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -150);
+                boostAmount = boostAmount - amountUsedToBoost;
 			}
         }
 	}

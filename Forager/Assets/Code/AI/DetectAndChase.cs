@@ -54,16 +54,10 @@ public class DetectAndChase : Character {
         //apply movement
         if (speed > 0)
         {
-            if (transform.parent)
-            {
-                transform.parent.position += transform.forward * speed * Time.deltaTime;
-            }
-            else
-            {
-                transform.position += transform.forward * speed * Time.deltaTime;
-            }
+            transform.position += transform.forward * speed * Time.deltaTime;
+
         }
-        if(Vector3.Distance(returnPoint,transform.position)<=1)
+        if (Vector3.Distance(returnPoint,transform.position)<=1)
         {
             returnPoint = Vector3.zero;
             DetectionCollider.enabled = true;
@@ -84,14 +78,12 @@ public class DetectAndChase : Character {
         //apply movement
         if (speed > 0)
         {
-            if (transform.parent)
-            {
-                transform.parent.position += transform.forward * speed * Time.deltaTime;
-            }
-            else
-            {
-                transform.position += transform.forward * speed * Time.deltaTime;
-            }
+            transform.position += transform.forward * speed * Time.deltaTime;
+
+        }
+        if(Vector3.Distance(playerRef.transform.position,transform.position)<=5.5f)
+        {
+            playerRef.GetComponent<Player>().PlayerDeath();
         }
     }
 
@@ -121,7 +113,7 @@ public class DetectAndChase : Character {
             isPlayerNear = false;
         }
     }
-
+    
     IEnumerator WaitToGetAway()
     {
         yield return new WaitForSeconds(5f);
