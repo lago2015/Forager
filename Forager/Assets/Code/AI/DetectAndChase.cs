@@ -15,7 +15,7 @@ public class DetectAndChase : Character {
         //Getter component for sphere collider
         collider = GetComponent<SphereCollider>();
         isPlayerNear = false;
-        enabled = false;
+        
         //saving the current radius of the enemy
         detectionRadius = collider.radius;
     }
@@ -28,7 +28,7 @@ public class DetectAndChase : Character {
         {
             ChasePlayer();
         }
-        else if(Vector3.Distance(transform.position,returnPoint)<=10)
+        else if(Vector3.Distance(transform.position,returnPoint)<=10 && returnPoint!=Vector3.zero)
         {
             ReturnPoint();
         }
@@ -62,8 +62,11 @@ public class DetectAndChase : Character {
         //apply rotation
         if (rotationSpeed > 0)
         {
-            Quaternion rotation = Quaternion.LookRotation(playerRef.transform.position - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+            if(playerRef)
+            {
+                Quaternion rotation = Quaternion.LookRotation(playerRef.transform.position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+            }
         }
         //apply movement
         if (speed > 0)
@@ -84,7 +87,6 @@ public class DetectAndChase : Character {
         if(col.GetComponent<Player>())
         {
             //turn on FixedUpdate() so the gameobject can pursue
-            enabled = true;
             isPlayerNear = true;
             //get player reference
             playerRef = col.gameObject;

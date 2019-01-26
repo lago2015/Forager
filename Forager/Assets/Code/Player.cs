@@ -56,6 +56,7 @@ public class Player : Character
 
     public void PlayerDeath()
     {
+        bIsDead = true;
         //Spawn explosion particle
         Destroy(gameObject);
     }
