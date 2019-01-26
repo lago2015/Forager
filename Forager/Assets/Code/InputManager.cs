@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
 	public static event MovementInput OnMovementInput;
 	
 	public delegate void RotationInput(int direction);
-	public static event MovementInput OnRotationInput;
+	public static event RotationInput OnRotationInput;
 	
 	int currentMovementDirection = 0;
 	int currentRotationDirection = 0;
@@ -26,21 +26,30 @@ public class InputManager : MonoBehaviour
 		int movementInput = GetMovementInput();
 		int rotationInput = GetRotationInput();
 		
+		/*if(movementInput != 0 && currentMovementDirection != movementInput)
+		{
+			currentMovementDirection = movementInput;
+		}
+		if(rotationInput != 0 && currentRotationDirection != rotationInput)
+		{
+			currentRotationDirection = rotationInput;
+		}*/
+		//Debug.Log(currentMovementDirection);
 		if(OnMovementInput != null)
 		{
-			if(currentMovementDirection != movementInput)
-			{
+			//if(currentMovementDirection != movementInput)
+			//{
 				currentMovementDirection = movementInput;
 				OnMovementInput(currentMovementDirection);
-			}
+			//}
 		}
-		if(rotationInput != null)
+		if(OnRotationInput != null)
 		{
-			if(currentRotationDirection != rotationInput)
-			{
+			//if(currentRotationDirection != rotationInput)
+			//{
 				currentRotationDirection = rotationInput;
 				OnRotationInput(currentRotationDirection);
-			}
+			//}
 		}
 		
 	}
@@ -72,7 +81,7 @@ public class InputManager : MonoBehaviour
 		}
 		else if(Input.GetAxisRaw("Vertical") <= -1)
 		{
-			return 2;
+			return -1;
 		}
 		return 0;
 	}
@@ -84,7 +93,7 @@ public class InputManager : MonoBehaviour
 		}
 		else if(Input.GetAxisRaw("Horizontal") <= -1)
 		{
-			return 2;
+			return -1;
 		}
 		return 0;
 	}
