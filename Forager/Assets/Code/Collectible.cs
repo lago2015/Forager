@@ -17,6 +17,7 @@ public class Collectible : MonoBehaviour {
 	private void OnTriggerEnter(Collider other)
 	{
 		//add item to users inventory
-		Destroy(this);
+		other.GetComponent<Player>().addToInventory(1);
+		Destroy(gameObject);
 	}
 }
