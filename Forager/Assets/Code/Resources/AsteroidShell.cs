@@ -1,16 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class AsteroidShell : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public Slider sliderComp;
+
+
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

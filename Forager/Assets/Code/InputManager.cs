@@ -12,7 +12,9 @@ public class InputManager : MonoBehaviour
 	
 	public delegate void RotationInput(int direction);
 	public static event RotationInput OnRotationInput;
-	
+
+    [HideInInspector]
+    public bool bIsMining;
 	int currentMovementDirection = 0;
 	int currentRotationDirection = 0;
 	// Use this for initialization
@@ -51,6 +53,15 @@ public class InputManager : MonoBehaviour
 				OnRotationInput(currentRotationDirection);
 			//}
 		}
+
+        if(Input.GetButtonDown("MiningTool"))
+        {
+            bIsMining = true;
+        }
+        if(Input.GetButtonUp("MiningTool"))
+        {
+            bIsMining = false;
+        }
 		
 	}
 	int GetPlayerDirectionalInput()
