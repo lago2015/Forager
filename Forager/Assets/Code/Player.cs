@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : Character 
 {
-	//string[] inventory = new string[5]; //probaly turn into list later
+    private int[] materialInventory =new int[4];
 	int amountCarrying = 0;
 	int score = 0;
 	
@@ -16,16 +16,43 @@ public class Player : Character
 	{
 		InputManager.OnMovementInput += Move;
 		InputManager.OnRotationInput += Rotate;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
+        scoreAmountDisplay.text = "Score: " + score;
+
+    }
+    //storing material count for when player goes back to hub
+    public void addMaterial(Collectible.MaterialSources currentMaterial)
+    {
+        switch(currentMaterial)
+        {
+            case Collectible.MaterialSources.orb:
+                materialInventory[0] += 1;
+                break;
+            case Collectible.MaterialSources.smallAsteroid:
+                materialInventory[1] += 3;
+                break;
+            case Collectible.MaterialSources.medAsteroid:
+                materialInventory[2] += 7;
+                break;
+            case Collectible.MaterialSources.larAsteroid:
+                materialInventory[3] += 15;
+                break;
+        }
+    }
+    //adds amount of each material to score then resets the material count
+    void MaterialCount()
+    {
+        for(int i=0;i<=materialInventory.Length-1;i++)
+        {
+            addScore(materialInventory[i]);
+            materialInventory[i] = 0;
+        }
+    }
+
 	public void addToInventory(int amount)
 	{
 		amountCarrying += amount;
-		inventoryAmountDisplay.text = amountCarrying.ToString();
+        inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
 	}
 	public int AmountCarrying
 	{
@@ -37,17 +64,20 @@ public class Player : Character
 	public void addScore(int amount)
 	{
 		score += amount;
-		scoreAmountDisplay.text = score.ToString();
+        scoreAmountDisplay.text = "Score: " + score;
 	}
 	public void ReachHome()
 	{
         if(amountCarrying>0)
-		    addScore(amountCarrying);
+        {
+            MaterialCount();
+        }
+		    
 		amountCarrying = 0;
 
         if(inventoryAmountDisplay)
-		    inventoryAmountDisplay.text = amountCarrying.ToString();
-	}
+		    inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
+    }
 
     private void OnCollisionEnter(Collision col)
     {
