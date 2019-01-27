@@ -11,6 +11,7 @@ public class Player : Character
     [HideInInspector]
     public int score = 0;
     public float wallBump=30;
+    private float audioDuration;
     [HideInInspector]
     public bool bIsMining;
 	public Text inventoryAmountDisplay;
@@ -20,9 +21,14 @@ public class Player : Character
     public Animator animComp;
     private Vector3 dir;
     private Rigidbody myBody;
+    private bool bIsPlayingDash;
+    private GameObject dashAudioObject;
+    private GameObject deathAudioObject;
+    private ObjectPoolManager audioScript;
     // Use this for initialization
     void Start()
     {
+        audioScript = GameObject.FindObjectOfType<ObjectPoolManager>();
         InputManager.OnMovementInput += Move;
         InputManager.OnRotationInput += Rotate;
         InputManager.OnDashInput += changeDashingState;
@@ -32,6 +38,7 @@ public class Player : Character
         scoreAmountDisplay.text = "Score: " + score;
         gameOverScript = GameObject.FindGameObjectWithTag("Respawn").GetComponent<GameOverManager>();
         myBody = GetComponent<Rigidbody>();
+        audioDuration = 2f;
     }
 
 
@@ -166,6 +173,26 @@ public class Player : Character
 	{
 		currentState = State.Dashing;
 		dashing = state;
-		animComp.SetBool("isBursting", state);
+        
+        if(!dashAudioObject&&dashing)
+        {
+            dashAudioObject = audioScript.FindObject("playerDash");
+            dashAudioObject.SetActive(true);
+            dashAudioObject.GetComponent<AudioSource>().Play();
+            audioDuration = 0.9f;
+            StartCoroutine(PutObjectBack("playerDash", dashAudioObject));
+        }
+        if(!bIsDead)
+        {
+            animComp.SetBool("isBursting", state);
+        }
+		
 	}
+
+    IEnumerator PutObjectBack(string poolName,GameObject objectToReturn)
+    {
+        yield return new WaitForSeconds(audioDuration);
+        dashAudioObject = null;
+        audioScript.PutBackObject(poolName, objectToReturn);
+    }
 }
