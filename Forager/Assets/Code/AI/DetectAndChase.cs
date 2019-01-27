@@ -12,6 +12,7 @@ public class DetectAndChase : Character {
     private Vector3 returnPoint;
     private SphereCollider DetectionCollider;
     private FindRandomPoint positionSelectorScript;
+	public int chaseSpeed;
     private void Awake()
     {
         //Getter component for sphere collider
@@ -78,12 +79,12 @@ public class DetectAndChase : Character {
             }
         }
         //apply movement
-        if (speed > 0)
+        if (chaseSpeed > 0)
         {
-            transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += transform.forward * chaseSpeed * Time.deltaTime;
 
         }
-        if(Vector3.Distance(playerRef.transform.position,transform.position)<=5.5f)
+        if(Vector3.Distance(playerRef.transform.position,transform.position)<=5.6f)
         {
             playerRef.GetComponent<Player>().PlayerDeath();
         }
