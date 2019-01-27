@@ -3,37 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : Character 
+public class Player : Character
 {
+    private GameOverManager gameOverScript;
     private int[] materialInventory =new int[4];
 	int amountCarrying = 0;
-	int score = 0;
+    [HideInInspector]
+    public int score = 0;
     [HideInInspector]
     public bool bIsMining;
 	public Text inventoryAmountDisplay;
 	public Text scoreAmountDisplay;
 	public Slider boostDisplay;
-	// Use this for initialization
-	void Start () 
-	{
-		InputManager.OnMovementInput += Move;
-		InputManager.OnRotationInput += Rotate;
+    public GameObject explosion;
+    public Animator animComp;
+    // Use this for initialization
+    void Start()
+    {
+        InputManager.OnMovementInput += Move;
+        InputManager.OnRotationInput += Rotate;
         InputManager.OnDashInput += Dash;
         //InputManager.onFireInput += OnFireInput;
         inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
         scoreAmountDisplay.text = "Score: " + score;
-
+        gameOverScript = GameObject.FindGameObjectWithTag("Respawn").GetComponent<GameOverManager>();
     }
+
 
     private void Update()
     {
         if (Input.GetButtonDown("MiningTool"))
         {
             bIsMining = true;
+            
         }
         if (Input.GetButtonUp("MiningTool"))
         {
             bIsMining = false;
+        }
+        if(Input.GetButtonDown("Fire2"))
+        {
+            animComp.SetBool("isBursting", true);
+        }
+        if(Input.GetButtonUp("Fire2"))
+        {
+            animComp.SetBool("isBursting", false);
         }
     }
 
@@ -100,21 +114,20 @@ public class Player : Character
 		boostDisplay.value = boostAmount;
     }
 
-    private void OnCollisionEnter(Collision col)
-    {
-        if(col.gameObject.CompareTag("Enemy") && !col.gameObject.GetComponent<Collider>().isTrigger)
-        {
-            PlayerDeath();
-        }
-    }
+
 
     public void PlayerDeath()
     {
         bIsDead = true;
+        if (gameOverScript)
+        {
+            gameOverScript.StartCountdownToGameOver(score);
+        }
         //Spawn explosion particle
         Destroy(gameObject);
+
     }
-	public override void Dash()
+    public override void Dash()
 	{
 		boostDisplay.value = boostAmount;
 		base.Dash();

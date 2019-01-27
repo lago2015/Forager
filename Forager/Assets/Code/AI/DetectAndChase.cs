@@ -60,7 +60,7 @@ public class DetectAndChase : Character {
         if (Vector3.Distance(returnPoint,transform.position)<=1)
         {
             returnPoint = Vector3.zero;
-            DetectionCollider.enabled = true;
+            DetectionCollider.radius=detectionRadius;
         }
     }
 
@@ -96,7 +96,7 @@ public class DetectAndChase : Character {
             //get player reference
             playerRef = col.gameObject;
             returnPoint = transform.position;
-            DetectionCollider.enabled = false;
+            DetectionCollider.radius=1;
         }
         else if(col.GetComponent<Home>())
         {
@@ -105,18 +105,18 @@ public class DetectAndChase : Character {
         }
     }
 
-    private void OnTriggerExit(Collider col)
-    {
-        if(col.GetComponent<Player>())
-        {
-            DetectionCollider.enabled = true;
-            isPlayerNear = false;
-        }
-    }
+    //private void OnTriggerExit(Collider col)
+    //{
+    //    if(col.GetComponent<Player>())
+    //    {
+    //        DetectionCollider.radius=detectionRadius;
+    //        isPlayerNear = false;
+    //    }
+    //}
     
     IEnumerator WaitToGetAway()
     {
         yield return new WaitForSeconds(5f);
-        DetectionCollider.enabled = true;
+        DetectionCollider.radius = detectionRadius;
     }
 }
