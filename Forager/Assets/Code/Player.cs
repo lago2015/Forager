@@ -22,13 +22,14 @@ public class Player : Character
     private Vector3 dir;
     private Rigidbody myBody;
     public bool bIsPlayingDash;
+    public bool bIsPlayingDigSound;
     private GameObject dashAudioObject;
     private GameObject deathAudioObject;
-    private PlayAudio audioScript;
+    private AudioController audioScript;
     // Use this for initialization
     void Start()
     {
-        audioScript = GetComponent<PlayAudio>();
+        audioScript = FindObjectOfType<AudioController>();
         InputManager.OnMovementInput += Move;
         InputManager.OnRotationInput += Rotate;
         InputManager.OnDashInput += changeDashingState;
@@ -126,7 +127,7 @@ public class Player : Character
 		{
 		    inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
 		}
-		boostAmount = 100;
+		boostAmount = 200;
 		boostDisplay.value = boostAmount;
     }
 
@@ -155,6 +156,7 @@ public class Player : Character
         {
             gameOverScript.StartCountdownToGameOver(score);
         }
+        FindObjectOfType<AudioController>().PlayerExplosion(transform.position);
         //Spawn explosion particle
         Instantiate(explosion, transform.position, Quaternion.identity);    
         Destroy(gameObject);
@@ -169,15 +171,17 @@ public class Player : Character
 	{
 		bIsMining = state;
         //Debug.Log("is mining: " + bIsMining);
-        //if(bIsMining)
-        //{
-        //    audioScript.PlayThisAudio("playerDrilling");
-        //}
-        //else
-        //{
-        //    audioScript.StopAudio("playerDrilling");
-        //}
-	}
+        if (bIsMining&&!bIsPlayingDigSound)
+        {
+            bIsPlayingDigSound = true;
+            audioScript.PlayerDigSrc(transform.position);
+        }
+        else if(!bIsMining&&bIsPlayingDigSound)
+        {
+            bIsPlayingDigSound = false;
+        }
+        
+    }
 	public void changeDashingState(bool state)
 	{
 		if(animComp != null)
@@ -194,22 +198,19 @@ public class Player : Character
 				dashing = state;
 				animComp.SetBool("isBursting", state);
 			}
-            //if(state&&!bIsPlayingDash)
-            //{
-            //    Debug.Log("State: " + state + " is Dashing: " + bIsPlayingDash);
-            //    bIsPlayingDash = true;
+            if (state && !bIsPlayingDash)
+            {
+                bIsPlayingDash = true;
 
-            //    audioScript.PlayThisAudio("playerDash");
-            //    StartCoroutine(ResetBool());
-
-
-            //}
+                audioScript.PlayerDashing(transform.position);
+                
+            }
+            else if(!state && bIsPlayingDash)
+            {
+                bIsPlayingDash = false;
+            }
         }
 	}
 
-    IEnumerator ResetBool()
-    {
-        yield return new WaitForSeconds(0.3f);
-        bIsPlayingDash = false;
-    }
+   
 }

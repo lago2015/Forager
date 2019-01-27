@@ -5,13 +5,18 @@ using UnityEngine;
 public class Home : MonoBehaviour {
 
 
+    private AudioController audioScript;
 
+    private void Awake()
+    {
+        audioScript = FindObjectOfType<AudioController>();
+    }
 
     void OnTriggerEnter(Collider other)
 	{
         if(other.GetComponent<Player>())
         {
-            GetComponent<PlayAudio>().PlayThisAudio("reachedHome");
+            audioScript.SpaceStationReachedSrc(transform.position);
             other.GetComponent<Player>().ReachHome();
         }
 		

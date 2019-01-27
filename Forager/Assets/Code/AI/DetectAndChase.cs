@@ -13,6 +13,7 @@ public class DetectAndChase : Character {
     private SphereCollider DetectionCollider;
     private FindRandomPoint positionSelectorScript;
 	public int chaseSpeed;
+    public Animator animComp;
     private void Awake()
     {
         //Getter component for sphere collider
@@ -48,6 +49,10 @@ public class DetectAndChase : Character {
 
     void ReturnPoint()
     {
+        if(animComp)
+        {
+            animComp.SetBool("isChasing", false);
+        }
         //apply rotation
         if (rotationSpeed > 0)
         {
@@ -69,6 +74,10 @@ public class DetectAndChase : Character {
 
     void ChasePlayer()
     {
+        if (animComp)
+        {
+            animComp.SetBool("isChasing", true);
+        }
         //apply rotation
         if (rotationSpeed > 0)
         {

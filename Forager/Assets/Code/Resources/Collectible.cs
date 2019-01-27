@@ -18,7 +18,8 @@ public class Collectible : MonoBehaviour {
             playerScript.addMaterial(currentMaterial);
             if(!bIsDead)
             {
-                GetComponent<PlayAudio>().PlayThisAudio("materialCollected");
+                FindObjectOfType<AudioController>().OreCollectedSrc(transform.position);
+
                 bIsDead = true;
             }
             GetComponent<Collider>().enabled = false;

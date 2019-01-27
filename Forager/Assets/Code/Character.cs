@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     public bool bIsCurrentlyMining;
 	protected bool dashing = false;
 	
-	protected int boostAmount = 100;
+	protected int boostAmount = 200;
 	private int amountUsedToBoost = 1;
 	//protected void Thrust(int direction)
 	void Start()
