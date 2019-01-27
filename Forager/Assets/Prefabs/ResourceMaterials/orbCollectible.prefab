@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23327998595879968}
   - component: {fileID: 135090610449387546}
   - component: {fileID: 114161159378373310}
+  - component: {fileID: 114402684164973034}
   m_Layer: 0
   m_Name: orbCollectible
   m_TagString: Untagged
@@ -97,6 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMaterial: 0
+--- !u!114 &114402684164973034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1876968049522498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a697414b9fe474eb525f2c09074c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135090610449387546
 SphereCollider:
   m_ObjectHideFlags: 1

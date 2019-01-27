@@ -6,7 +6,7 @@ public class Collectible : MonoBehaviour {
 
     public enum MaterialSources { orb,smallAsteroid,medAsteroid,larAsteroid}
     public MaterialSources currentMaterial;
-
+    private bool bIsDead;
     private Player playerScript;
 	private void OnTriggerEnter(Collider other)
 	{
@@ -16,7 +16,13 @@ public class Collectible : MonoBehaviour {
             //add item to users inventory
             playerScript.addToInventory(1);
             playerScript.addMaterial(currentMaterial);
-            Destroy(gameObject);
+            if(!bIsDead)
+            {
+                GetComponent<PlayAudio>().PlayThisAudio("materialCollected");
+                bIsDead = true;
+            }
+            GetComponent<Collider>().enabled = false;
+            Destroy(gameObject,1.5f);
         }
 		
 	}

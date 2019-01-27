@@ -37,15 +37,16 @@ public class ObjectPool : MonoBehaviour
 
             return obj;
         }
-        else
-        {
-            // If there are no objects in pool, create a new object to use
-            // NOTE: This should not be used much, make sure to have a good reasonable initial size of pool to limit creating objects
-            GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity) as GameObject;
-            obj.transform.SetParent(gameObject.transform);
+        //else
+        //{
+        //    // If there are no objects in pool, create a new object to use
+        //    // NOTE: This should not be used much, make sure to have a good reasonable initial size of pool to limit creating objects
+        //    GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity) as GameObject;
+        //    obj.transform.SetParent(gameObject.transform);
 
-            return obj;
-        }
+        //    return obj;
+        //}
+        return null;
 
     }
 

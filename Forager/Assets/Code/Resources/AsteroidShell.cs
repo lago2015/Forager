@@ -10,7 +10,7 @@ public class AsteroidShell : MonoBehaviour {
     private bool isCoolingDown;
     public GameObject dropObject;
     public GameObject explosion;
-
+    private bool bIsDead;
     private void Awake()
     {
         sliderComp.gameObject.SetActive(false);
@@ -49,8 +49,14 @@ public class AsteroidShell : MonoBehaviour {
             if(asteroidHealth<=0)
             {
                 Instantiate(dropObject, transform.position, Quaternion.identity);
-                Instantiate(explosion, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                Instantiate(explosion, transform.position,Quaternion.identity);
+                if(!bIsDead)
+                {
+                    bIsDead = true;
+                    GetComponent<PlayAudio>().PlayThisAudio("asteroidExplosion");
+                }
+                GetComponent<Collider>().enabled = false;
+                Destroy(gameObject,1.5f);
             }
             else
             {

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 135113534803444760}
   - component: {fileID: 114205340089367496}
   - component: {fileID: 65218739003223612}
+  - component: {fileID: 114430079048156062}
   m_Layer: 0
   m_Name: SmallAsteroidShell
   m_TagString: Untagged
@@ -120,9 +121,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1012444863293002}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.012, y: -88.896, z: 0.34765625}
-  m_LocalScale: {x: 6.029551, y: 6.029551, z: 6.029551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -181.8, y: 256.7, z: 0.34765625}
+  m_LocalScale: {x: 3.92396, y: 3.92396, z: 3.92396}
   m_Children:
   - {fileID: 224301364620641146}
   m_Father: {fileID: 0}
@@ -261,6 +262,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114430079048156062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1012444863293002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a697414b9fe474eb525f2c09074c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114506571209737200
 MonoBehaviour:
   m_ObjectHideFlags: 1

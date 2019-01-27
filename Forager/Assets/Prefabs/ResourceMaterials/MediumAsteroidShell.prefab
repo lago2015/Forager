@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 135007665467608518}
   - component: {fileID: 114315545839280368}
   - component: {fileID: 65920368039753776}
+  - component: {fileID: 114000125565696590}
   m_Layer: 0
   m_Name: MediumAsteroidShell
   m_TagString: Untagged
@@ -120,9 +121,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1990677471147478}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 77.718, y: -60.516, z: 0.34765625}
-  m_LocalScale: {x: 6.9318933, y: 6.9318933, z: 6.9318933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -133.1, y: 285.1, z: 0.34765625}
+  m_LocalScale: {x: 4.76497, y: 4.76497, z: 4.76497}
   m_Children:
   - {fileID: 224645061689753954}
   m_Father: {fileID: 0}
@@ -182,6 +183,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114000125565696590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990677471147478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a697414b9fe474eb525f2c09074c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114100648988663612
 MonoBehaviour:
   m_ObjectHideFlags: 1

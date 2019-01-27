@@ -9,50 +9,50 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1629334014582120}
+  m_RootGameObject: {fileID: 1307561604670818}
   m_IsPrefabAsset: 1
---- !u!1 &1629334014582120
+--- !u!1 &1307561604670818
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4669210170553004}
-  - component: {fileID: 82903201660889038}
+  - component: {fileID: 4245693299755628}
+  - component: {fileID: 82964049691738136}
   m_Layer: 0
-  m_Name: Player_Dash
+  m_Name: asteroidExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4669210170553004
+--- !u!4 &4245693299755628
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1629334014582120}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 1307561604670818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82903201660889038
+--- !u!82 &82964049691738136
 AudioSource:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1629334014582120}
+  m_GameObject: {fileID: 1307561604670818}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243841795624888976, guid: 66a80e3db3cb57e4ea0a926812009956,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 101106cd810615041bb13f121e59a2d7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 123d748cbf6033046b16fcdfff27ba7c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.139
+  m_Volume: 0.101
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -21,14 +21,14 @@ public class Player : Character
     public Animator animComp;
     private Vector3 dir;
     private Rigidbody myBody;
-    private bool bIsPlayingDash;
+    public bool bIsPlayingDash;
     private GameObject dashAudioObject;
     private GameObject deathAudioObject;
-    private ObjectPoolManager audioScript;
+    private PlayAudio audioScript;
     // Use this for initialization
     void Start()
     {
-        audioScript = GameObject.FindObjectOfType<ObjectPoolManager>();
+        audioScript = GetComponent<PlayAudio>();
         InputManager.OnMovementInput += Move;
         InputManager.OnRotationInput += Rotate;
         InputManager.OnDashInput += changeDashingState;
@@ -168,6 +168,15 @@ public class Player : Character
 	public void Mining(bool state)
 	{
 		bIsMining = state;
+        //Debug.Log("is mining: " + bIsMining);
+        //if(bIsMining)
+        //{
+        //    audioScript.PlayThisAudio("playerDrilling");
+        //}
+        //else
+        //{
+        //    audioScript.StopAudio("playerDrilling");
+        //}
 	}
 	public void changeDashingState(bool state)
 	{
@@ -185,13 +194,22 @@ public class Player : Character
 				dashing = state;
 				animComp.SetBool("isBursting", state);
 			}
-		}
+            //if(state&&!bIsPlayingDash)
+            //{
+            //    Debug.Log("State: " + state + " is Dashing: " + bIsPlayingDash);
+            //    bIsPlayingDash = true;
+
+            //    audioScript.PlayThisAudio("playerDash");
+            //    StartCoroutine(ResetBool());
+
+
+            //}
+        }
 	}
 
-    IEnumerator PutObjectBack(string poolName,GameObject objectToReturn)
+    IEnumerator ResetBool()
     {
-        yield return new WaitForSeconds(audioDuration);
-        dashAudioObject = null;
-        audioScript.PutBackObject(poolName, objectToReturn);
+        yield return new WaitForSeconds(0.3f);
+        bIsPlayingDash = false;
     }
 }
