@@ -53,7 +53,7 @@ public class AsteroidShell : MonoBehaviour {
                 if(!bIsDead)
                 {
                     bIsDead = true;
-                    GetComponent<PlayAudio>().PlayThisAudio("asteroidExplosion");
+                    FindObjectOfType<AudioController>().AsteroidExplosion(transform.position);
                 }
                 GetComponent<Collider>().enabled = false;
                 Destroy(gameObject,1.5f);
