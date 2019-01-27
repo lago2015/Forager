@@ -171,22 +171,21 @@ public class Player : Character
 	}
 	public void changeDashingState(bool state)
 	{
-		currentState = State.Dashing;
-		dashing = state;
-        
-        if(!dashAudioObject&&dashing)
-        {
-            dashAudioObject = audioScript.FindObject("playerDash");
-            dashAudioObject.SetActive(true);
-            dashAudioObject.GetComponent<AudioSource>().Play();
-            audioDuration = 0.9f;
-            StartCoroutine(PutObjectBack("playerDash", dashAudioObject));
-        }
-        if(!bIsDead)
-        {
-            animComp.SetBool("isBursting", state);
-        }
-		
+		if(animComp != null)
+		{
+			if(boostAmount <= 0 && state)
+			{
+				currentState = State.Idle;
+				dashing = false;
+				animComp.SetBool("isBursting", false);
+			}
+			else
+			{
+				currentState = State.Dashing;
+				dashing = state;
+				animComp.SetBool("isBursting", state);
+			}
+		}
 	}
 
     IEnumerator PutObjectBack(string poolName,GameObject objectToReturn)
