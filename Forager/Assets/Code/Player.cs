@@ -25,7 +25,8 @@ public class Player : Character
     {
         InputManager.OnMovementInput += Move;
         InputManager.OnRotationInput += Rotate;
-        InputManager.OnDashInput += Dash;
+        InputManager.OnDashInput += changeDashingState;
+		InputManager.OnMiningInput += Mining;
         //InputManager.onFireInput += OnFireInput;
         inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
         scoreAmountDisplay.text = "Score: " + score;
@@ -36,7 +37,7 @@ public class Player : Character
 
     private void Update()
     {
-        if (Input.GetButtonDown("MiningTool"))
+        /*if (Input.GetButtonDown("MiningTool"))
         {
             bIsMining = true;
             
@@ -44,15 +45,19 @@ public class Player : Character
         if (Input.GetButtonUp("MiningTool"))
         {
             bIsMining = false;
-        }
-        if(Input.GetButtonDown("Fire2"))
+        }*/
+        /*if(Input.GetButtonDown("Fire2"))
         {
             animComp.SetBool("isBursting", true);
         }
         if(Input.GetButtonUp("Fire2"))
         {
             animComp.SetBool("isBursting", false);
-        }
+        }*/
+		if(dashing)
+		{
+			Dash();
+		}
     }
 
     //storing material count for when player goes back to hub
@@ -150,7 +155,17 @@ public class Player : Character
     }
     public override void Dash()
 	{
-		boostDisplay.value = boostAmount;
 		base.Dash();
+		boostDisplay.value = boostAmount;
+	}
+	public void Mining(bool state)
+	{
+		bIsMining = state;
+	}
+	public void changeDashingState(bool state)
+	{
+		currentState = State.Dashing;
+		dashing = state;
+		animComp.SetBool("isBursting", state);
 	}
 }

@@ -13,8 +13,11 @@ public class InputManager : MonoBehaviour
 	public delegate void RotationInput(int direction);
 	public static event RotationInput OnRotationInput;
 	
-	public delegate void DashInput();
+	public delegate void DashInput(bool buttonState);
 	public static event DashInput OnDashInput;
+	
+	public delegate void MiningInput(bool buttonState);
+	public static event MiningInput OnMiningInput;
 
     //public delegate void FireInput(bool isFiring);
     //public static event FireInput onFireInput;
@@ -33,6 +36,8 @@ public class InputManager : MonoBehaviour
 	{
 		int movementInput = GetMovementInput();
 		int rotationInput = GetRotationInput();
+		bool miningInputResult = GetMiningInput();
+		bool dashingInputResult = GetDashingInput();
 		
 		/*if(movementInput != 0 && currentMovementDirection != movementInput)
 		{
@@ -59,12 +64,18 @@ public class InputManager : MonoBehaviour
 				OnRotationInput(currentRotationDirection);
 			//}
 		}
-		if(Input.GetButton("Fire2"))
+		if(OnDashInput != null)
 		{
-			OnDashInput();
+			if(dashingInputResult)
+			{
+				OnDashInput(dashingInputResult);
+			}
+			OnDashInput(dashingInputResult);
 		}
-        
-		
+		if(OnMiningInput != null)
+		{
+			OnMiningInput(miningInputResult);
+		}
 	}
 
     
@@ -112,5 +123,13 @@ public class InputManager : MonoBehaviour
 			return -1;
 		}
 		return 0;
+	}
+	bool GetMiningInput()
+	{
+		return Input.GetButton("MiningTool");
+	}
+	bool GetDashingInput()
+	{
+		return Input.GetButton("Fire2");
 	}
 }
