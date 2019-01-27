@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 135007665467608518}
   - component: {fileID: 114315545839280368}
   - component: {fileID: 65920368039753776}
-  - component: {fileID: 54977062426915986}
   m_Layer: 0
   m_Name: MediumAsteroidShell
   m_TagString: Untagged
@@ -121,9 +120,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1990677471147478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.58, y: -16.5, z: 0.34765625}
-  m_LocalScale: {x: 4.764974, y: 4.764974, z: 4.764974}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 77.718, y: -60.516, z: 0.34765625}
+  m_LocalScale: {x: 6.9318933, y: 6.9318933, z: 6.9318933}
   m_Children:
   - {fileID: 224645061689753954}
   m_Father: {fileID: 0}
@@ -170,22 +169,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1990677471147478}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54977062426915986
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1990677471147478}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Mesh: {fileID: 4300000, guid: 58b036a9611083242aa29fea2d956f7b, type: 3}
 --- !u!65 &65920368039753776
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -265,9 +249,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 20
+  m_MaxValue: 30
   m_WholeNumbers: 0
-  m_Value: 20
+  m_Value: 30
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -303,6 +287,7 @@ MonoBehaviour:
   sliderComp: {fileID: 114128000254806370}
   asteroidHealth: 30
   dropObject: {fileID: 1415153821219226, guid: 2dba7366910c5294c8e51a8dedc3e198, type: 2}
+  explosion: {fileID: 1000010981681902, guid: 1d67bdb45de73ab4cadefddd702f4f8d, type: 2}
 --- !u!114 &114656861356558650
 MonoBehaviour:
   m_ObjectHideFlags: 1

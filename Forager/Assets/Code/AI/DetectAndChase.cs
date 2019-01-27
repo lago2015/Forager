@@ -11,14 +11,16 @@ public class DetectAndChase : Character {
     public float loseInterestRadius;
     private Vector3 returnPoint;
     private SphereCollider DetectionCollider;
+    private FindRandomPoint positionSelectorScript;
     private void Awake()
     {
         //Getter component for sphere collider
         DetectionCollider = GetComponent<SphereCollider>();
         isPlayerNear = false;
-        
+        positionSelectorScript = GetComponent<FindRandomPoint>();
         //saving the current radius of the enemy
         detectionRadius = DetectionCollider.radius;
+        returnPoint = positionSelectorScript.FindNewPosition();
     }
 
     // Update is called once per frame
@@ -59,7 +61,7 @@ public class DetectAndChase : Character {
         }
         if (Vector3.Distance(returnPoint,transform.position)<=1)
         {
-            returnPoint = Vector3.zero;
+            returnPoint = positionSelectorScript.FindNewPosition();
             DetectionCollider.radius=detectionRadius;
         }
     }

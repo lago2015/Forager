@@ -10,6 +10,7 @@ public class Player : Character
 	int amountCarrying = 0;
     [HideInInspector]
     public int score = 0;
+    public float wallBump=30;
     [HideInInspector]
     public bool bIsMining;
 	public Text inventoryAmountDisplay;
@@ -17,6 +18,8 @@ public class Player : Character
 	public Slider boostDisplay;
     public GameObject explosion;
     public Animator animComp;
+    private Vector3 dir;
+    private Rigidbody myBody;
     // Use this for initialization
     void Start()
     {
@@ -27,6 +30,7 @@ public class Player : Character
         inventoryAmountDisplay.text = "Current Amount: " + amountCarrying;
         scoreAmountDisplay.text = "Score: " + score;
         gameOverScript = GameObject.FindGameObjectWithTag("Respawn").GetComponent<GameOverManager>();
+        myBody = GetComponent<Rigidbody>();
     }
 
 
@@ -114,7 +118,23 @@ public class Player : Character
 		boostDisplay.value = boostAmount;
     }
 
+    private void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.CompareTag("Finish"))
+        {
+            myBody.velocity = Vector3.zero;
+            dir = col.gameObject.transform.position - transform.position;
+            dir = dir.normalized;
+            myBody.AddForce(-dir * wallBump, ForceMode.VelocityChange);
+            StartCoroutine(ResetVelocity());
+        }
+    }
 
+    IEnumerator ResetVelocity()
+    {
+        yield return new WaitForSeconds(0.1f);
+        myBody.velocity = Vector3.zero;
+    }
 
     public void PlayerDeath()
     {
@@ -124,6 +144,7 @@ public class Player : Character
             gameOverScript.StartCountdownToGameOver(score);
         }
         //Spawn explosion particle
+        Instantiate(explosion, transform.position, Quaternion.identity);    
         Destroy(gameObject);
 
     }

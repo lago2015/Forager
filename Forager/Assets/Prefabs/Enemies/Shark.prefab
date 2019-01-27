@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 135570427781270664}
   - component: {fileID: 114835231778896554}
   - component: {fileID: 65705116045571596}
+  - component: {fileID: 114658695576049298}
   m_Layer: 0
   m_Name: Shark
   m_TagString: Enemy
@@ -229,6 +230,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.35, y: 0.41, z: 0.48}
   m_Center: {x: 0, y: 0, z: 0.05}
+--- !u!114 &114658695576049298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792723462920250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ee1b6ff26ce464faf6619c9e150534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114835231778896554
 MonoBehaviour:
   m_ObjectHideFlags: 1

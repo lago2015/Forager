@@ -9,7 +9,7 @@ public class AsteroidShell : MonoBehaviour {
     public float asteroidHealth=20;
     private bool isCoolingDown;
     public GameObject dropObject;
-
+    public GameObject explosion;
 
     private void Awake()
     {
@@ -49,6 +49,7 @@ public class AsteroidShell : MonoBehaviour {
             if(asteroidHealth<=0)
             {
                 Instantiate(dropObject, transform.position, Quaternion.identity);
+                Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
             else
